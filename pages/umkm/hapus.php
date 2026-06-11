@@ -1,16 +1,21 @@
-<?php
-include 'koneksi.php';
+<?php include '../../config/koneksi.php';
 
-// Menangkap ID dari URL
-$id = $_GET['id'];
-
-// Query Hapus
-$query = "DELETE FROM umkm WHERE id_umkm = '$id'";
-
-if(mysqli_query($koneksi, $query)) {
-    header("Location: index.php");
-    exit();
+if (isset($_GET['id'])) {
+    $id_umkm = $_GET['id'];
+    
+    $query = "DELETE FROM umkm WHERE id_umkm = '$id_umkm'";
+    $delete = mysqli_query($koneksi, $query);
+    
+    if ($delete) {
+        echo "<script>
+                alert('Data UMKM Berhasil Dihapus!');
+                window.location='crud_umkm.php';
+            </script>";
+    } else {
+        echo "Gagal menghapus data: " . mysqli_error($koneksi);
+    }
 } else {
-    echo "Gagal menghapus data!";
+    header("Location: crud_umkm.php");
+    exit;
 }
 ?>

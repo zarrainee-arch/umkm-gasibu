@@ -1,20 +1,27 @@
-<?php
-include 'koneksi.php';
+<?php include '../../config/koneksi.php';
 
-// Menangkap ID dari URL
-$id = $_GET['id_produk'];
+$id_produk = isset($_GET['id']) ? mysqli_real_escape_string($koneksi, $_GET['id']) : '';
 
-// Query Hapus
-$querypr = "DELETE FROM produk_rasa WHERE id_produk = '$id'";
+if ($id_produk != '') {
+    $hapus_relasi = mysqli_query($koneksi, "DELETE FROM produk_rasa WHERE id_produk = '$id_produk'");
 
-if(mysqli_query($koneksi, $querypr)) {
-    $querypr = "DELETE FROM produk WHERE id_produk = '$id'";
-    if(mysqli_query($koneksi, $queryp)) {
-        header("Location: index.php");
+    if ($hapus_relasi) {
+        $hapus_produk = mysqli_query($koneksi, "DELETE FROM produk WHERE id_produk = '$id_produk'");
+
+        if ($hapus_produk) {
+            echo "<script>
+                    alert('Produk Berhasil Dihapus!');
+                    window.location='list.php';
+                </script>";
+        } else {
+            echo "Gagal menghapus produk utama: " . mysqli_error($koneksi);
+        }
     } else {
-        echo "Gagal menghapus ptoduk";
+        echo "Gagal menghapus varian rasa produk: " . mysqli_error($koneksi);
     }
+
 } else {
-    echo "Gagal menghapus rasa";
+    header("Location: list.php");
+    exit;
 }
 ?>

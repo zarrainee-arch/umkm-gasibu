@@ -44,6 +44,7 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/style.css">
     <title>Daftar Produk UMKM Gasibu</title>
 </head>
 
@@ -69,6 +70,9 @@ if (!$result) {
         
         <main>
             <h2>DAFTAR PRODUK</h2>
+            <a href="tambah.php" class="btn-tambah">
+    TAMBAH PRODUK
+</a>
             <form class="filter-container" method="GET" action="">
                 <!--Mencari produk berdasarkan nama-->
                 <div class="search-box">
@@ -124,8 +128,27 @@ if (!$result) {
                             <td><?= $row['nama_asal_daerah']; ?></td>
                             <td><?= $row['rasa'] ? $row['rasa'] : '-'; ?></td>
                             <td>
-                                <a href="detail.php?id_produk=<?= $row['id_produk']; ?>">Detail</a>
-                            </td>
+
+    <a
+    href="detail.php?id_produk=<?= $row['id_produk']; ?>"
+    class="btn-edit">
+        Detail
+    </a>
+
+    <a
+    href="edit.php?id=<?= $row['id_produk']; ?>"
+    class="btn-edit">
+        Edit
+    </a>
+
+    <a
+    href="hapus.php?id=<?= $row['id_produk']; ?>"
+    class="btn-hapus"
+    onclick="return confirm('Hapus produk ini?')">
+        Hapus
+    </a>
+
+</td>
                         </tr>
                     <?php } ?>
                 </tbody>

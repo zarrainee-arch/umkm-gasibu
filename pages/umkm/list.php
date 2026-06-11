@@ -29,11 +29,12 @@ $queryJalan = mysqli_query($koneksi, "SELECT * FROM jalan ORDER BY nama_jalan AS
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar UMKM Gasibu</title>
+     <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="Logo UMKM">
+            <img src="../../assets/logo.png" alt="Logo UMKM">
             <h1>UMKM GASIBU</h1>
         </div>
     </header>
@@ -43,7 +44,7 @@ $queryJalan = mysqli_query($koneksi, "SELECT * FROM jalan ORDER BY nama_jalan AS
         <aside>
             <nav>
                 <ul>
-                    <li><a href="index.php">HOME</a></li>
+                    <li><a href="../../index.php">HOME</a></li>
                     <li><a href="list.php">DAFTAR UMKM</a></li>
                     <li><a href="../produk/list.php">DAFTAR PRODUK</a></li> 
                     <li><a href="cari_umkm.php">CARI UMKM BUKA</a></li>
@@ -52,6 +53,9 @@ $queryJalan = mysqli_query($koneksi, "SELECT * FROM jalan ORDER BY nama_jalan AS
         
         <main>
             <h2>DAFTAR UMKM</h2>
+            <a href="tambah.php" class="btn-tambah">
+    TAMBAH UMKM
+</a>
             <form method="GET" class="filter-container">
                 <div class="search-box">
                     <input 
@@ -73,13 +77,15 @@ $queryJalan = mysqli_query($koneksi, "SELECT * FROM jalan ORDER BY nama_jalan AS
                         <?php } ?>
                     </select>
                 </div>
-                <button type="submit">
-                    Cari
+                <button
+                type="submit"
+                class="btn-tambah">
+                Cari
                 </button>
             </form>
             
             <!--Tabel daftar produk -->
-            <table border="1">
+            <table class="table-data">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -105,7 +111,11 @@ $queryJalan = mysqli_query($koneksi, "SELECT * FROM jalan ORDER BY nama_jalan AS
                             <td><?= $row['jam_tutup']; ?></td>
                             <td><?= $row['status_sertifikasi']; ?></td>
                             <td>
-                                <a href="detail.php?id_umkm=<?= $row['id_umkm']; ?>">Detail</a>
+                                <a
+href="detail.php?id_umkm=<?= $row['id_umkm']; ?>"
+class="btn-edit">
+Detail
+</a>
                             </td>
                         </tr>
                     <?php } ?>
